@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>ResQnova — Experiment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="brand-row" href="grades.html">
+        <span class="brand-mark sm">RQ</span>
+        <span class="brand-name sm">ResQnova</span>
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="grades.html">Grades</a>
+        <a class="nav-link" href="subjects.html">Subjects</a>
+        <a class="nav-link" href="theory.html">Theory</a>
+        <a class="nav-link active" href="labs.html">Labs</a>
+        <a class="nav-link" href="chatbot.html">Chatbot</a>
+        <a class="nav-link logout" href="index.html">Logout</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <a class="back-link" href="labs.html">← Back to Labs</a>
+
+      <section class="detail-hero">
+        <span class="badge">Grade 9 · Science · Chemistry</span>
+        <h1 class="page-title">Acid-Base Reaction</h1>
+        <p class="page-sub">
+          A classic neutralization experiment showing how an acid and a base
+          react to form salt and water.
+        </p>
+        <div class="detail-actions">
+          <a class="btn btn-primary btn-lg" href="lab-detail.html">🥽 Launch VR Simulation</a>
+          <a class="btn btn-ghost btn-lg" href="labs.html">View other experiments</a>
+        </div>
+        <p class="hint">VR simulation is a future feature — this button is a placeholder.</p>
+      </section>
+
+      <section class="detail-grid">
+        <article class="card detail-card">
+          <h2 class="section-title"><span class="section-num">1</span> Materials</h2>
+          <ul class="bullet-list">
+            <li>Dilute hydrochloric acid (HCl)</li>
+            <li>Sodium hydroxide solution (NaOH)</li>
+            <li>Phenolphthalein indicator</li>
+            <li>Beaker, dropper and stirring rod</li>
+            <li>Safety goggles and gloves</li>
+          </ul>
+        </article>
+
+        <article class="card detail-card">
+          <h2 class="section-title"><span class="section-num">2</span> Steps</h2>
+          <ol class="step-list">
+            <li>Pour a small amount of NaOH solution into a clean beaker.</li>
+            <li>Add 2–3 drops of phenolphthalein — the solution turns pink.</li>
+            <li>Slowly add HCl drop by drop while gently stirring.</li>
+            <li>Continue until the pink color just disappears.</li>
+            <li>Record the volume of HCl used.</li>
+          </ol>
+        </article>
+
+        <article class="card detail-card span-2">
+          <h2 class="section-title"><span class="section-num">3</span> Observation &amp; Result</h2>
+          <p class="paragraph">
+            The pink color of the basic solution disappears as the acid neutralizes it.
+            This shows that an acid and a base react to form a neutral solution.
+          </p>
+          <div class="equation">
+            HCl + NaOH → NaCl + H<sub>2</sub>O
+          </div>
+          <p class="paragraph">
+            <strong>Conclusion:</strong> Acids and bases neutralize each other to form salt
+            and water. This is called a <em>neutralization reaction</em>.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© ResQnova · A VR-ready learning platform</p>
+    </footer>
+  </body>
+</html>

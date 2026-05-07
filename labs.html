@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>ResQnova — Labs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="brand-row" href="grades.html">
+        <span class="brand-mark sm">RQ</span>
+        <span class="brand-name sm">ResQnova</span>
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="grades.html">Grades</a>
+        <a class="nav-link" href="subjects.html">Subjects</a>
+        <a class="nav-link" href="theory.html">Theory</a>
+        <a class="nav-link active" href="labs.html">Labs</a>
+        <a class="nav-link" href="chatbot.html">Chatbot</a>
+        <a class="nav-link logout" href="index.html">Logout</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="hero">
+        <a class="back-link" id="backLink" href="subjects.html">← Back</a>
+        <span class="badge" id="badge">Grade 9 · Practical Labs</span>
+        <h1 class="page-title" id="pageTitle">Practical Labs</h1>
+        <p class="page-sub" id="pageSub">
+          NEB-aligned experiments designed for hands-on practice — and ready for VR simulation.
+        </p>
+      </section>
+
+      <section class="grid grid-2" id="labsGrid"></section>
+    </main>
+
+    <footer class="footer">
+      <p>© ResQnova · A VR-ready learning platform</p>
+    </footer>
+
+    <script>
+      (function () {
+        var DATA = {
+          physics: {
+            title: "Physics — Practical Labs",
+            badge: "Grade 9 · Physics · Labs",
+            sub: "Hands-on Physics experiments — VR-ready simulations included.",
+            back: { href: "subject-detail.html?branch=physics", label: "← Back to Physics" },
+            labs: [
+              { tag: "Physics", thumbTitle: "Motion", thumb: "thumb-4", title: "Motion Experiment", text: "Measure speed, acceleration and Newton's laws in action." },
+              { tag: "Physics", thumbTitle: "Pendulum", thumb: "thumb-2", title: "Simple Pendulum", text: "Measure the time period and find gravitational acceleration." },
+              { tag: "Physics", thumbTitle: "Density", thumb: "thumb-3", title: "Density of Solids", text: "Use displacement to determine the density of solid objects." },
+              { tag: "Physics", thumbTitle: "Circuit", thumb: "thumb-6", title: "Series & Parallel Circuit", text: "Build simple circuits and observe current and voltage." }
+            ]
+          },
+          chemistry: {
+            title: "Chemistry — Practical Labs",
+            badge: "Grade 9 · Chemistry · Labs",
+            sub: "Hands-on Chemistry experiments — VR-ready simulations included.",
+            back: { href: "subject-detail.html?branch=chemistry", label: "← Back to Chemistry" },
+            labs: [
+              { tag: "Chemistry", thumbTitle: "Acid-Base", thumb: "thumb-1", title: "Acid-Base Reaction", text: "Observe a neutralization reaction between an acid and a base." },
+              { tag: "Chemistry", thumbTitle: "pH Test", thumb: "thumb-2", title: "pH Indicator Test", text: "Use indicators to identify acidic, neutral and basic solutions." },
+              { tag: "Chemistry", thumbTitle: "Mixtures", thumb: "thumb-3", title: "Separation of Mixtures", text: "Filter, evaporate and decant to separate common mixtures." },
+              { tag: "Chemistry", thumbTitle: "Reaction", thumb: "thumb-6", title: "Simple Chemical Reaction", text: "Combine reactants and watch a clear, observable change." }
+            ]
+          },
+          biology: {
+            title: "Biology — Practical Labs",
+            badge: "Grade 9 · Biology · Labs",
+            sub: "Hands-on Biology experiments — VR-ready simulations included.",
+            back: { href: "subject-detail.html?branch=biology", label: "← Back to Biology" },
+            labs: [
+              { tag: "Biology", thumbTitle: "Microscope", thumb: "thumb-5", title: "Microscope Observation", text: "Examine plant and animal cells under a virtual microscope." },
+              { tag: "Biology", thumbTitle: "Leaf", thumb: "thumb-3", title: "Leaf Stomata Study", text: "Observe and identify stomata on a leaf surface." },
+              { tag: "Biology", thumbTitle: "Osmosis", thumb: "thumb-1", title: "Osmosis in Plant Cells", text: "Watch water move across a semi-permeable membrane." },
+              { tag: "Biology", thumbTitle: "Starch Test", thumb: "thumb-2", title: "Starch Test in Leaves", text: "Use iodine to confirm photosynthesis in green leaves." }
+            ]
+          }
+        };
+
+        var params = new URLSearchParams(window.location.search);
+        var key = (params.get("branch") || "").toLowerCase();
+        var data = DATA[key];
+
+        if (data) {
+          document.getElementById("pageTitle").textContent = data.title;
+          document.getElementById("badge").textContent = data.badge;
+          document.getElementById("pageSub").textContent = data.sub;
+          var back = document.getElementById("backLink");
+          back.href = data.back.href;
+          back.textContent = data.back.label;
+          document.title = "ResQnova — " + data.title;
+        }
+
+        var labs = (data && data.labs) || [
+          { tag: "Chemistry", thumbTitle: "Acid-Base", thumb: "thumb-1", title: "Acid-Base Reaction", text: "Observe a neutralization reaction between an acid and a base." },
+          { tag: "Chemistry", thumbTitle: "pH Test", thumb: "thumb-2", title: "pH Indicator Test", text: "Use indicators to identify acidic, neutral and basic solutions." },
+          { tag: "Physics", thumbTitle: "Motion", thumb: "thumb-4", title: "Motion Experiment", text: "Measure speed, acceleration and Newton's laws in action." },
+          { tag: "Biology", thumbTitle: "Microscope", thumb: "thumb-5", title: "Microscope Observation", text: "Examine plant and animal cells under a virtual microscope." }
+        ];
+
+        var grid = document.getElementById("labsGrid");
+        var html = labs.map(function (l) {
+          return ''
+            + '<a class="card lab-card" href="lab-detail.html">'
+            +   '<div class="lab-thumb ' + l.thumb + '">'
+            +     '<span class="thumb-tag">' + l.tag + '</span>'
+            +     '<span class="thumb-title">' + l.thumbTitle + '</span>'
+            +   '</div>'
+            +   '<div class="card-body">'
+            +     '<h3 class="card-title">' + l.title + '</h3>'
+            +     '<p class="card-text">' + l.text + '</p>'
+            +     '<div class="meta-row">'
+            +       '<span class="meta-pill vr-ready">🥽 VR Ready</span>'
+            +       '<span class="card-cta">Open lab →</span>'
+            +     '</div>'
+            +   '</div>'
+            + '</a>';
+        }).join("");
+        grid.innerHTML = html;
+      })();
+    </script>
+  </body>
+</html>

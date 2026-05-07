@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>ResQnova — Subject</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="brand-row" href="grades.html">
+        <span class="brand-mark sm">RQ</span>
+        <span class="brand-name sm">ResQnova</span>
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="grades.html">Grades</a>
+        <a class="nav-link active" href="subjects.html">Subjects</a>
+        <a class="nav-link" href="theory.html">Theory</a>
+        <a class="nav-link" href="labs.html">Labs</a>
+        <a class="nav-link" href="chatbot.html">Chatbot</a>
+        <a class="nav-link logout" href="index.html">Logout</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="hero">
+        <a class="back-link" href="science.html">← Back to Science</a>
+        <span class="badge">Grade 9 · Science</span>
+        <h1 class="page-title" id="branchTitle">Science</h1>
+        <p class="page-sub">
+          Choose how you'd like to learn — structured theory or hands-on practical labs.
+        </p>
+      </section>
+
+      <section class="grid grid-2">
+        <a class="card big-card" id="theoryLink" href="theory.html">
+          <div class="card-icon icon-blue">📚</div>
+          <div class="card-body">
+            <h3 class="card-title">Theory</h3>
+            <p class="card-text">
+              NEB-aligned structured chapters with interactive video lessons.
+            </p>
+            <span class="card-cta">Open theory →</span>
+          </div>
+        </a>
+
+        <a class="card big-card" id="labsLink" href="labs.html">
+          <div class="card-icon icon-purple">🧪</div>
+          <div class="card-body">
+            <h3 class="card-title">Practical Labs</h3>
+            <p class="card-text">
+              Hands-on experiments with materials, steps and VR-ready simulations.
+            </p>
+            <span class="card-cta">Open labs →</span>
+          </div>
+        </a>
+      </section>
+
+      <section class="strip">
+        <div class="strip-item">
+          <span class="strip-num">12</span>
+          <span class="strip-label">Theory chapters</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-num">8</span>
+          <span class="strip-label">Practical labs</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-num">VR</span>
+          <span class="strip-label">Lab-ready</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© ResQnova · A VR-ready learning platform</p>
+    </footer>
+
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var branch = (params.get("branch") || "").toLowerCase();
+        var labels = { physics: "Physics", chemistry: "Chemistry", biology: "Biology" };
+        var label = labels[branch];
+        if (label) {
+          var title = document.getElementById("branchTitle");
+          if (title) title.textContent = label;
+          document.title = "ResQnova — " + label;
+          var theoryLink = document.getElementById("theoryLink");
+          var labsLink = document.getElementById("labsLink");
+          if (theoryLink) theoryLink.href = "theory.html?branch=" + branch;
+          if (labsLink) labsLink.href = "labs.html?branch=" + branch;
+        }
+      })();
+    </script>
+  </body>
+</html>

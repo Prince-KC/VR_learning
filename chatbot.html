@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>ResQnova — ResQ Tutor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="brand-row" href="grades.html">
+        <span class="brand-mark sm">RQ</span>
+        <span class="brand-name sm">ResQnova</span>
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="grades.html">Grades</a>
+        <a class="nav-link" href="subjects.html">Subjects</a>
+        <a class="nav-link" href="theory.html">Theory</a>
+        <a class="nav-link" href="labs.html">Labs</a>
+        <a class="nav-link active" href="chatbot.html">Chatbot</a>
+        <a class="nav-link logout" href="index.html">Logout</a>
+      </nav>
+    </header>
+
+    <main class="page chat-page">
+      <section class="hero chat-hero">
+        <span class="badge">AI Tutor · Powered by Gemini</span>
+        <h1 class="page-title">ResQ Tutor</h1>
+        <p class="page-sub">
+          Ask anything about your school subjects — Science, Math, English, Nepali, Social Studies or Computer.
+        </p>
+      </section>
+
+      <section class="chat-shell">
+        <div class="chat-window" id="chat-window" aria-live="polite">
+          <div class="msg msg-bot">
+            <div class="avatar avatar-bot">RQ</div>
+            <div class="bubble bubble-bot">
+              Hi! I'm your ResQ Tutor. Ask me anything from your Grade 5–10 NEB subjects — for example, <em>"What is the difference between an acid and a base?"</em> or <em>"Help me solve 2x + 5 = 15."</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="suggestion-row" id="suggestions">
+          <button class="chip" data-q="Explain Newton's first law with an example.">Newton's first law?</button>
+          <button class="chip" data-q="What is photosynthesis in simple words?">What is photosynthesis?</button>
+          <button class="chip" data-q="Solve 3x + 7 = 22 step by step.">Solve 3x + 7 = 22</button>
+          <button class="chip" data-q="Difference between an acid and a base?">Acids vs bases</button>
+        </div>
+
+        <form class="chat-form" id="chat-form" autocomplete="off">
+          <input
+            class="chat-input"
+            id="chat-input"
+            type="text"
+            placeholder="Type your question…"
+            required
+            autocomplete="off"
+          />
+          <button class="btn btn-primary chat-send" type="submit" id="chat-send">
+            <span class="send-label">Send</span>
+            <span class="send-icon">➤</span>
+          </button>
+        </form>
+        <p class="hint">Tip: Ask in plain English or Nepali. Press Enter to send.</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© ResQnova · A VR-ready learning platform</p>
+    </footer>
+
+    <script>
+      (function () {
+        const win = document.getElementById("chat-window");
+        const form = document.getElementById("chat-form");
+        const input = document.getElementById("chat-input");
+        const sendBtn = document.getElementById("chat-send");
+        const suggestions = document.getElementById("suggestions");
+
+        const history = [];
+
+        function escapeHtml(str) {
+          return str
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+        }
+
+        function formatMessage(text) {
+          let html = escapeHtml(text);
+          html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+          html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
+          html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+          html = html.replace(/\n/g, "<br/>");
+          return html;
+        }
+
+        function appendMessage(role, text, opts) {
+          opts = opts || {};
+          const wrapper = document.createElement("div");
+          wrapper.className = "msg msg-" + (role === "user" ? "user" : "bot");
+
+          const avatar = document.createElement("div");
+          avatar.className = "avatar avatar-" + (role === "user" ? "user" : "bot");
+          avatar.textContent = role === "user" ? "You" : "RQ";
+
+          const bubble = document.createElement("div");
+          bubble.className = "bubble bubble-" + (role === "user" ? "user" : "bot");
+
+          if (opts.typing) {
+            bubble.classList.add("typing");
+            bubble.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+          } else {
+            bubble.innerHTML = formatMessage(text);
+          }
+
+          wrapper.appendChild(avatar);
+          wrapper.appendChild(bubble);
+          win.appendChild(wrapper);
+          win.scrollTop = win.scrollHeight;
+          return bubble;
+        }
+
+        async function sendMessage(text) {
+          if (!text || sendBtn.disabled) return;
+          appendMessage("user", text);
+          history.push({ role: "user", content: text });
+          input.value = "";
+
+          sendBtn.disabled = true;
+          input.disabled = true;
+          if (suggestions) suggestions.style.display = "none";
+
+          const typingBubble = appendMessage("bot", "", { typing: true });
+
+          try {
+            const res = await fetch("/api/chat", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ messages: history }),
+            });
+
+            const data = await res.json().catch(function () { return {}; });
+            const reply = (data && data.reply) || data.error || "Sorry, I couldn't generate a reply.";
+
+            typingBubble.classList.remove("typing");
+            typingBubble.innerHTML = formatMessage(reply);
+            win.scrollTop = win.scrollHeight;
+
+            if (data && data.reply) {
+              history.push({ role: "assistant", content: data.reply });
+            }
+          } catch (err) {
+            typingBubble.classList.remove("typing");
+            typingBubble.innerHTML = formatMessage(
+              "I'm having trouble connecting. Please check your internet and try again."
+            );
+          } finally {
+            sendBtn.disabled = false;
+            input.disabled = false;
+            input.focus();
+          }
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          sendMessage(input.value.trim());
+        });
+
+        if (suggestions) {
+          suggestions.addEventListener("click", function (e) {
+            const target = e.target.closest("button.chip");
+            if (!target) return;
+            const q = target.getAttribute("data-q");
+            sendMessage(q);
+          });
+        }
+
+        input.focus();
+      })();
+    </script>
+  </body>
+</html>

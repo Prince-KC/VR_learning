@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>ResQnova — Sign in</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="auth-body">
+    <main class="auth-stage">
+      <div class="auth-panel">
+        <div class="auth-brand">
+          <span class="auth-mark">RQ</span>
+          <span class="auth-wordmark">ResQnova</span>
+        </div>
+
+        <h1 class="auth-h1">Sign in</h1>
+        <p class="auth-p">Enter your credentials to access your account.</p>
+
+        <form class="auth-form" action="grades.html" method="get">
+          <label class="field">
+            <span class="field-label">Username</span>
+            <input
+              class="input"
+              type="text"
+              name="username"
+              autocomplete="username"
+              required
+            />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Password</span>
+            <input
+              class="input"
+              type="password"
+              name="password"
+              autocomplete="current-password"
+              required
+            />
+          </label>
+
+          <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+      </div>
+
+      <p class="auth-legal">© ResQnova</p>
+    </main>
+  </body>
+</html>

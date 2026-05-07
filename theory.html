@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>ResQnova — Theory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="brand-row" href="grades.html">
+        <span class="brand-mark sm">RQ</span>
+        <span class="brand-name sm">ResQnova</span>
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="grades.html">Grades</a>
+        <a class="nav-link" href="subjects.html">Subjects</a>
+        <a class="nav-link active" href="theory.html">Theory</a>
+        <a class="nav-link" href="labs.html">Labs</a>
+        <a class="nav-link" href="chatbot.html">Chatbot</a>
+        <a class="nav-link logout" href="index.html">Logout</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="hero">
+        <a class="back-link" id="backLink" href="subjects.html">← Back</a>
+        <span class="badge" id="badge">Grade 9 · Theory</span>
+        <h1 class="page-title" id="pageTitle">Theory Chapters</h1>
+        <p class="page-sub" id="pageSub">
+          NEB-structured topics with immersive video lessons. Tap any chapter to open its video.
+        </p>
+      </section>
+
+      <section class="grid grid-3" id="chaptersGrid"></section>
+    </main>
+
+    <footer class="footer">
+      <p>© ResQnova · A VR-ready learning platform</p>
+    </footer>
+
+    <script>
+      (function () {
+        var DATA = {
+          physics: {
+            title: "Physics — Theory",
+            badge: "Grade 9 · Physics · Theory",
+            sub: "NEB Physics chapters with immersive video lessons.",
+            back: { href: "subject-detail.html?branch=physics", label: "← Back to Physics" },
+            chapters: [
+              { tag: "Chapter 1", title: "Measurement", text: "Units, instruments and accuracy in scientific measurement.", thumb: "v1", duration: "12:40" },
+              { tag: "Chapter 2", title: "Force and Motion", text: "Newton's laws, friction and everyday motion examples.", thumb: "v2", duration: "14:05" },
+              { tag: "Chapter 3", title: "Pressure", text: "Pressure in solids, liquids and gases with real examples.", thumb: "v3", duration: "10:22" },
+              { tag: "Chapter 4", title: "Work, Energy & Power", text: "Forms of energy, conservation and simple machines.", thumb: "v4", duration: "13:10" },
+              { tag: "Chapter 5", title: "Light", text: "Reflection, refraction, lenses and the human eye.", thumb: "v5", duration: "11:45" },
+              { tag: "Chapter 6", title: "Electricity & Magnetism", text: "Current, voltage, circuits and magnetic effects.", thumb: "v6", duration: "15:20" }
+            ]
+          },
+          chemistry: {
+            title: "Chemistry — Theory",
+            badge: "Grade 9 · Chemistry · Theory",
+            sub: "NEB Chemistry chapters with immersive video lessons.",
+            back: { href: "subject-detail.html?branch=chemistry", label: "← Back to Chemistry" },
+            chapters: [
+              { tag: "Chapter 1", title: "Matter", text: "States of matter, properties and physical changes.", thumb: "v4", duration: "15:30" },
+              { tag: "Chapter 2", title: "Atomic Structure", text: "Atoms, electrons, protons and the structure of matter.", thumb: "v5", duration: "11:18" },
+              { tag: "Chapter 3", title: "Periodic Table", text: "Periods, groups and trends across the periodic table.", thumb: "v6", duration: "12:50" },
+              { tag: "Chapter 4", title: "Chemical Reactions", text: "Types of reactions, balancing equations and examples.", thumb: "v1", duration: "13:35" },
+              { tag: "Chapter 5", title: "Acids, Bases & Salts", text: "pH, indicators, neutralization and common salts.", thumb: "v2", duration: "13:55" },
+              { tag: "Chapter 6", title: "Metals & Non-metals", text: "Properties, uses and reactivity of common elements.", thumb: "v3", duration: "11:05" }
+            ]
+          },
+          biology: {
+            title: "Biology — Theory",
+            badge: "Grade 9 · Biology · Theory",
+            sub: "NEB Biology chapters with immersive video lessons.",
+            back: { href: "subject-detail.html?branch=biology", label: "← Back to Biology" },
+            chapters: [
+              { tag: "Chapter 1", title: "The Cell", text: "Cell structure, organelles and basic functions.", thumb: "v3", duration: "12:10" },
+              { tag: "Chapter 2", title: "Tissues", text: "Plant and animal tissues and their roles.", thumb: "v1", duration: "10:48" },
+              { tag: "Chapter 3", title: "Plant Life", text: "Photosynthesis, respiration and transport in plants.", thumb: "v2", duration: "13:30" },
+              { tag: "Chapter 4", title: "Human Body Systems", text: "Digestive, respiratory and circulatory systems.", thumb: "v4", duration: "15:00" },
+              { tag: "Chapter 5", title: "Reproduction", text: "Reproduction in plants and animals — basic concepts.", thumb: "v5", duration: "12:20" },
+              { tag: "Chapter 6", title: "Ecosystems", text: "Food chains, habitats and the balance of nature.", thumb: "v6", duration: "11:40" }
+            ]
+          },
+          math: {
+            title: "Math — Theory",
+            badge: "Grade 9 · Math · Immersive Video",
+            sub: "Step-by-step Math chapters delivered as immersive video lessons.",
+            back: { href: "subjects.html", label: "← Back to Subjects" },
+            chapters: [
+              { tag: "Chapter 1", title: "Sets", text: "Sets, subsets, operations and Venn diagrams.", thumb: "v1", duration: "11:20" },
+              { tag: "Chapter 2", title: "Real Numbers", text: "Rational, irrational and operations on real numbers.", thumb: "v2", duration: "12:10" },
+              { tag: "Chapter 3", title: "Algebra", text: "Expressions, equations and factorization.", thumb: "v3", duration: "13:45" },
+              { tag: "Chapter 4", title: "Geometry", text: "Triangles, quadrilaterals and circle theorems.", thumb: "v4", duration: "14:30" },
+              { tag: "Chapter 5", title: "Trigonometry", text: "Ratios, identities and right-triangle problems.", thumb: "v5", duration: "13:00" },
+              { tag: "Chapter 6", title: "Statistics & Probability", text: "Mean, median, mode and basic probability.", thumb: "v6", duration: "12:25" }
+            ]
+          }
+        };
+
+        var params = new URLSearchParams(window.location.search);
+        var key = (params.get("branch") || params.get("subject") || "").toLowerCase();
+        var data = DATA[key];
+
+        if (data) {
+          document.getElementById("pageTitle").textContent = data.title;
+          document.getElementById("badge").textContent = data.badge;
+          document.getElementById("pageSub").textContent = data.sub;
+          var back = document.getElementById("backLink");
+          back.href = data.back.href;
+          back.textContent = data.back.label;
+          document.title = "ResQnova — " + data.title;
+        }
+
+        var chapters = (data && data.chapters) || [
+          { tag: "Chapter 1", title: "Measurement", text: "Units, instruments and accuracy in scientific measurement.", thumb: "v1", duration: "12:40" },
+          { tag: "Chapter 2", title: "Force and Motion", text: "Newton's laws, friction and everyday motion examples.", thumb: "v2", duration: "14:05" },
+          { tag: "Chapter 3", title: "Pressure", text: "Pressure in solids, liquids and gases with real examples.", thumb: "v3", duration: "10:22" },
+          { tag: "Chapter 4", title: "Matter", text: "States of matter, properties and physical changes.", thumb: "v4", duration: "15:30" },
+          { tag: "Chapter 5", title: "Atomic Structure", text: "Atoms, electrons, protons and the structure of matter.", thumb: "v5", duration: "11:18" },
+          { tag: "Chapter 6", title: "Acids, Bases & Salts", text: "pH, indicators, neutralization and common salts.", thumb: "v6", duration: "13:55" }
+        ];
+
+        var grid = document.getElementById("chaptersGrid");
+        var html = chapters.map(function (c) {
+          return ''
+            + '<article class="card video-card">'
+            +   '<div class="video-thumb ' + c.thumb + '">'
+            +     '<div class="play-icon">▶</div>'
+            +     '<span class="duration">' + c.duration + '</span>'
+            +   '</div>'
+            +   '<div class="card-body">'
+            +     '<span class="chapter-tag">' + c.tag + '</span>'
+            +     '<h3 class="card-title">' + c.title + '</h3>'
+            +     '<p class="card-text">' + c.text + '</p>'
+            +     '<span class="card-cta">Watch video →</span>'
+            +   '</div>'
+            + '</article>';
+        }).join("");
+        grid.innerHTML = html;
+      })();
+    </script>
+  </body>
+</html>

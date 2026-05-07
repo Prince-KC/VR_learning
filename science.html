@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>ResQnova — Science</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="brand-row" href="grades.html">
+        <span class="brand-mark sm">RQ</span>
+        <span class="brand-name sm">ResQnova</span>
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="grades.html">Grades</a>
+        <a class="nav-link active" href="subjects.html">Subjects</a>
+        <a class="nav-link" href="theory.html">Theory</a>
+        <a class="nav-link" href="labs.html">Labs</a>
+        <a class="nav-link" href="chatbot.html">Chatbot</a>
+        <a class="nav-link logout" href="index.html">Logout</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="hero">
+        <a class="back-link" href="subjects.html">← Back to Subjects</a>
+        <span class="badge">Grade 9 · Science</span>
+        <h1 class="page-title">Science</h1>
+        <p class="page-sub">
+          Choose a branch of science to explore.
+        </p>
+      </section>
+
+      <section class="grid grid-3">
+        <a class="card subject-card" href="subject-detail.html?branch=physics">
+          <div class="subj-icon s1">⚛️</div>
+          <h3 class="card-title">Physics</h3>
+          <p class="card-text">Motion, forces, energy &amp; the laws that govern them.</p>
+          <span class="card-cta">Open Physics →</span>
+        </a>
+
+        <a class="card subject-card" href="subject-detail.html?branch=chemistry">
+          <div class="subj-icon s2">🧪</div>
+          <h3 class="card-title">Chemistry</h3>
+          <p class="card-text">Matter, reactions, acids, bases &amp; periodic trends.</p>
+          <span class="card-cta">Open Chemistry →</span>
+        </a>
+
+        <a class="card subject-card" href="subject-detail.html?branch=biology">
+          <div class="subj-icon s3">🌱</div>
+          <h3 class="card-title">Biology</h3>
+          <p class="card-text">Life, cells, body systems &amp; the living world.</p>
+          <span class="card-cta">Open Biology →</span>
+        </a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© ResQnova · A VR-ready learning platform</p>
+    </footer>
+  </body>
+</html>
